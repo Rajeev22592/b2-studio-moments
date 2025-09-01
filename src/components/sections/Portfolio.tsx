@@ -63,7 +63,7 @@ const Portfolio = () => {
           {portfolioImages.map((image, index) => (
             <div
               key={index}
-              className={`photo-item fade-in-delay-${index % 3 + 1} ${
+              className={`photo-item group fade-in-delay-${index % 3 + 1} ${
                 image.size === 'large' ? 'md:col-span-2 md:row-span-2' :
                 image.size === 'medium' ? 'md:col-span-1 md:row-span-2' : ''
               }`}
