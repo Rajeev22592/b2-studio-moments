@@ -166,8 +166,9 @@ All colors MUST be HSL.
   
   /* Photography Grid Styles */
   .photo-grid {
-    @apply grid gap-4 auto-rows-dense;
+    @apply grid gap-4;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 250px;
   }
   
   .photo-item {
