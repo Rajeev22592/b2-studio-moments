@@ -36,7 +36,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="hero-section">
+    <section className="hero-section relative">
       <Carousel
         opts={{
           loop: true,
@@ -47,15 +47,19 @@ const Hero = () => {
             delay: 5000,
           }),
         ]}
-        className="w-full h-full"
+        className="w-full h-full absolute inset-0"
       >
         <CarouselContent className="h-full">
           {slides.map((slide, index) => (
-            <CarouselItem key={index} className="h-full">
+            <CarouselItem key={index} className="relative h-full">
               {/* Background Image */}
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${slide.image})` }}
+                style={{ 
+                  backgroundImage: `url(${slide.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
               />
               
               {/* Overlay */}
