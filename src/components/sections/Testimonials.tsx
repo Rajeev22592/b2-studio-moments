@@ -1,4 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import { Star } from 'lucide-react';
 
 const Testimonials = () => {
@@ -39,37 +41,56 @@ const Testimonials = () => {
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className={`bg-white shadow-medium hover:shadow-hero transition-shadow fade-in-delay-${index + 1}`}>
-              <CardContent className="p-6">
-                {/* Rating */}
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-primary fill-current" />
-                  ))}
-                </div>
+        {/* Testimonials Carousel */}
+        <Carousel
+          opts={{
+            loop: true,
+            align: 'start',
+          }}
+          plugins={[
+            Autoplay({
+              delay: 4000,
+            }),
+          ]}
+          className="w-full max-w-5xl mx-auto"
+        >
+          <CarouselContent>
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-1">
+                  <Card className="bg-white shadow-medium hover:shadow-hero transition-shadow h-full">
+                    <CardContent className="p-6">
+                      {/* Rating */}
+                      <div className="flex items-center mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-5 w-5 text-primary fill-current" />
+                        ))}
+                      </div>
 
-                {/* Testimonial Text */}
-                <p className="text-muted-foreground mb-6 leading-relaxed italic">
-                  "{testimonial.text}"
-                </p>
+                      {/* Testimonial Text */}
+                      <p className="text-muted-foreground mb-6 leading-relaxed italic">
+                        "{testimonial.text}"
+                      </p>
 
-                {/* Client Info */}
-                <div className="flex items-center">
-                  <div className="text-3xl mr-4">{testimonial.image}</div>
-                  <div>
-                    <h4 className="font-playfair font-semibold text-foreground">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-sm text-primary">{testimonial.event}</p>
-                  </div>
+                      {/* Client Info */}
+                      <div className="flex items-center">
+                        <div className="text-3xl mr-4">{testimonial.image}</div>
+                        <div>
+                          <h4 className="font-playfair font-semibold text-foreground">
+                            {testimonial.name}
+                          </h4>
+                          <p className="text-sm text-primary">{testimonial.event}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
 
         {/* Trust Indicators */}
         <div className="mt-16 text-center fade-in-delay-2">
