@@ -12,6 +12,15 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+// Portfolio Category Pages
+import Weddings from "./pages/portfolio/Weddings";
+import Portraits from "./pages/portfolio/Portraits";
+import Events from "./pages/portfolio/Events";
+import Commercial from "./pages/portfolio/Commercial";
+import Product from "./pages/portfolio/Product";
+import Fashion from "./pages/portfolio/Fashion";
+import Travel from "./pages/portfolio/Travel";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -25,6 +34,13 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/weddings" element={<Weddings />} />
+            <Route path="/portfolio/portraits" element={<Portraits />} />
+            <Route path="/portfolio/events" element={<Events />} />
+            <Route path="/portfolio/commercial" element={<Commercial />} />
+            <Route path="/portfolio/product" element={<Product />} />
+            <Route path="/portfolio/fashion" element={<Fashion />} />
+            <Route path="/portfolio/travel" element={<Travel />} />
             <Route path="/services" element={<Services />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
