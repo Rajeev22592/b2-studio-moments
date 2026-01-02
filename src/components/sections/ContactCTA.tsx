@@ -1,5 +1,8 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Phone, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
 
 const ContactCTA = () => {
   return (
@@ -18,9 +21,12 @@ const ContactCTA = () => {
             <Button 
               size="lg" 
               className="bg-black text-white hover:bg-gray-800 px-8 py-4 font-semibold"
+              asChild
             >
-              Book Consultation
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <Link href="/contact">
+                Book Consultation
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
             
             <Button 

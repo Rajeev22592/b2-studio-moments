@@ -1,5 +1,6 @@
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { ArrowLeft, Download, Share2, Heart } from 'lucide-react';
@@ -52,13 +53,6 @@ const GalleryLayout = ({
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>{title} Photography | B2 Studio Portfolio</title>
-        <meta name="description" content={metaDescription} />
-        <meta name="keywords" content={keywords} />
-        <link rel="canonical" href={`https://b2studio.com/portfolio/${title.toLowerCase()}`} />
-      </Helmet>
-
       <Navigation />
 
       <main className="pt-16">
@@ -74,7 +68,7 @@ const GalleryLayout = ({
           <div className="absolute inset-0 flex flex-col justify-end pb-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <Link
-                to="/portfolio"
+                href="/portfolio"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary-glow transition-colors mb-6"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -211,7 +205,7 @@ const GalleryLayout = ({
               {relatedCategories.map((category) => (
                 <Link
                   key={category.id}
-                  to={`/portfolio/${category.id}`}
+                  href={`/portfolio/${category.id}`}
                   className="px-6 py-3 bg-background border border-border rounded-full text-foreground hover:border-primary hover:text-primary transition-colors duration-300"
                 >
                   {category.title}

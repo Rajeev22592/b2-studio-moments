@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Camera, Instagram, Facebook, Twitter, Youtube, MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2">
               <Camera className="h-8 w-8 text-primary" />
               <span className="font-playfair text-2xl font-bold">B2 Studio</span>
             </Link>
@@ -35,11 +35,11 @@ const Footer = () => {
           <div>
             <h3 className="font-playfair text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-secondary-foreground/80 hover:text-primary transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-secondary-foreground/80 hover:text-primary transition-colors">About</Link></li>
-              <li><Link to="/portfolio" className="text-secondary-foreground/80 hover:text-primary transition-colors">Portfolio</Link></li>
-              <li><Link to="/services" className="text-secondary-foreground/80 hover:text-primary transition-colors">Services</Link></li>
-              <li><Link to="/contact" className="text-secondary-foreground/80 hover:text-primary transition-colors">Contact</Link></li>
+              <li><Link href="/" className="text-secondary-foreground/80 hover:text-primary transition-colors">Home</Link></li>
+              <li><Link href="/about" className="text-secondary-foreground/80 hover:text-primary transition-colors">About</Link></li>
+              <li><Link href="/portfolio" className="text-secondary-foreground/80 hover:text-primary transition-colors">Portfolio</Link></li>
+              <li><Link href="/services" className="text-secondary-foreground/80 hover:text-primary transition-colors">Services</Link></li>
+              <li><Link href="/contact" className="text-secondary-foreground/80 hover:text-primary transition-colors">Contact</Link></li>
             </ul>
           </div>
 

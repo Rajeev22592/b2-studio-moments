@@ -1,0 +1,19 @@
+{
+  "/_error": "pages/_error.js",
+  "/About": "pages/About.js",
+  "/Blog": "pages/Blog.js",
+  "/Contact": "pages/Contact.js",
+  "/Home": "pages/Home.js",
+  "/NotFound": "pages/NotFound.js",
+  "/Portfolio": "pages/Portfolio.js",
+  "/Services": "pages/Services.js",
+  "/portfolio/Commercial": "pages/portfolio/Commercial.js",
+  "/portfolio/Events": "pages/portfolio/Events.js",
+  "/portfolio/Fashion": "pages/portfolio/Fashion.js",
+  "/portfolio/Portraits": "pages/portfolio/Portraits.js",
+  "/portfolio/Product": "pages/portfolio/Product.js",
+  "/portfolio/Travel": "pages/portfolio/Travel.js",
+  "/portfolio/Weddings": "pages/portfolio/Weddings.js",
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js"
+}
