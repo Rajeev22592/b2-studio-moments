@@ -27,6 +27,7 @@ const ContactCTA = () => {
               size="lg" 
               variant="outline" 
               className="border-black text-black hover:bg-black hover:text-white px-8 py-4 font-semibold"
+              onClick={() => window.open('tel:+919799887002', '_self')}
             >
               <Phone className="mr-2 h-5 w-5" />
               Call Now
@@ -34,15 +35,20 @@ const ContactCTA = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-black/70">
-            <div className="flex items-center">
+            <a href="tel:+919799887002" className="flex items-center hover:text-black transition-colors">
               <Phone className="h-5 w-5 mr-2" />
-              <span>+91 98765 43210</span>
-            </div>
+              <span>+91 97998 87002</span>
+            </a>
             <div className="hidden sm:block w-px h-6 bg-black/30"></div>
-            <div className="flex items-center">
+            <a 
+              href="https://wa.me/919799887002?text=Hi%20B2%20Studio!%20I'm%20interested%20in%20your%20photography%20services." 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-black transition-colors"
+            >
               <MessageCircle className="h-5 w-5 mr-2" />
-              <span>WhatsApp Available</span>
-            </div>
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>

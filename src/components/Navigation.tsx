@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Camera } from 'lucide-react';
+import { Menu, X, Camera, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
@@ -43,9 +43,17 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <Button variant="outline" className="ml-4">
-              Book Now
-            </Button>
+            <a
+              href="https://wa.me/919799887002"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4"
+            >
+              <Button className="bg-[#25D366] hover:bg-[#20BA5A] text-white">
+                <MessageCircle className="h-4 w-4 mr-2" />
+                WhatsApp
+              </Button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -81,9 +89,18 @@ const Navigation = () => {
               </Link>
             ))}
             <div className="px-3 py-2">
-              <Button variant="outline" className="w-full">
-                Book Now
-              </Button>
+              <a
+                href="https://wa.me/919799887002"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full"
+                onClick={() => setIsOpen(false)}
+              >
+                <Button className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-white">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  WhatsApp
+                </Button>
+              </a>
             </div>
           </div>
         </div>

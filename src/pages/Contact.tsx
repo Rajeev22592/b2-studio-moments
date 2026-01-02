@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabaseClient';
 import { 
   Phone, 
   Mail, 
@@ -40,36 +41,92 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
-    });
-    
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      eventType: '',
-      eventDate: '',
-      message: ''
-    });
-    setIsSubmitting(false);
+    try {
+      // Validate required fields
+      if (!formData.name || !formData.email || !formData.eventType || !formData.message) {
+        toast({
+          title: "Validation Error",
+          description: "Please fill in all required fields (Name, Email, Event Type, and Message).",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Insert into Supabase
+      // Format the date properly if provided
+      const formattedDate = formData.eventDate 
+        ? new Date(formData.eventDate).toISOString().split('T')[0]
+        : null;
+
+      // Insert into Supabase
+      const { error } = await supabase
+  .from('inquiries')
+  .insert([{
+    full_name: formData.name.trim(),
+    email: formData.email.trim(),
+    phone: formData.phone?.trim() || null,
+    event_type: formData.eventType,
+    preferred_date: formattedDate,
+    message: formData.message.trim(),
+  }]);
+
+if (error) throw error;
+
+      
+      // Log the full error for debugging
+      if (error) {
+        console.error('Full Supabase error:', JSON.stringify(error, null, 2));
+      }
+
+      if (error) {
+        throw error;
+      }
+
+      // Success
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        eventType: '',
+        eventDate: '',
+        message: ''
+      });
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      console.error('Error details:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      });
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent("Hi B2 Studio! I'm interested in your photography services.");
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/919799887002?text=${message}`, '_blank');
   };
 
   const contactInfo = [
     {
       icon: Phone,
       title: "Phone",
-      details: ["+91 98765 43210", "+91 98765 43211"],
-      action: "tel:+919876543210"
+      details: ["+91 97998 87002"],
+      action: "tel:+919799887002"
     },
     {
       icon: Mail,
@@ -183,17 +240,18 @@ const Contact = () => {
                           type="tel"
                           value={formData.phone}
                           onChange={handleInputChange}
-                          placeholder="+91 98765 43210"
+                          placeholder="+91 XXXXX XXXXX"
                           className="bg-background"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="eventType">Event Type</Label>
+                        <Label htmlFor="eventType">Event Type *</Label>
                         <select
                           id="eventType"
                           name="eventType"
                           value={formData.eventType}
                           onChange={handleInputChange}
+                          required
                           className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                         >
                           <option value="">Select event type</option>
