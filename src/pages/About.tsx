@@ -8,7 +8,7 @@ import heroWedding from '@/assets/hero-wedding.jpg';
 
 const About = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navigation />
       <main className="pt-16">
         {/* Hero */}
