@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "b2-studio-moments",
+      "version": "0.1.0",
+      "title": "b2-studio-moments"
+    },
+    "tools": [
+      {
+        "name": "list_services",
+        "title": "List photography services",
+        "description": "List the photography and video services B2 Studio offers, with their descriptions and included features.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_packages",
+        "title": "List pricing packages",
+        "description": "List B2 Studio's booking packages with prices and what each one includes.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_portfolio_categories",
+        "title": "List portfolio categories",
+        "description": "List the portfolio galleries on the B2 Studio website and the page path for each.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact_info",
+        "title": "Get studio contact info",
+        "description": "Get B2 Studio's public contact details: phone, WhatsApp, emails, address, working hours and social links.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_inquiry",
+        "title": "Submit a booking inquiry",
+        "description": "Send a booking inquiry to B2 Studio, exactly like the website's public contact form. Inquiries cannot be read back.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "full_name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Name of the person inquiring."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "description": "Contact email address."
+            },
+            "phone": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Optional contact phone number."
+            },
+            "event_type": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Type of shoot or event. Common values: Wedding, Pre-Wedding, Corporate Event, Fashion Shoot, Product Shoot, Portrait Session, Other."
+            },
+            "preferred_date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "description": "Optional preferred date in YYYY-MM-DD format."
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Details about the shoot or event."
+            }
+          },
+          "required": [
+            "full_name",
+            "email",
+            "event_type",
+            "message"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
