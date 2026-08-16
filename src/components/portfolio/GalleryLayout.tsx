@@ -61,32 +61,32 @@ const GalleryLayout = ({
 
       <Navigation />
 
-      <main className="pt-16">
-        {/* Hero Section */}
-        <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
+      <main className="pt-24">
+        {/* Page Hero */}
+        <section className="relative h-[65vh] min-h-[450px] overflow-hidden bg-black">
           <img
             src={heroImage}
             alt={`${title} Photography`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent" />
           
-          <div className="absolute inset-0 flex flex-col justify-end pb-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="absolute inset-0 flex flex-col justify-end pb-16">
+            <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 w-full">
               <Link
                 to="/portfolio"
-                className="inline-flex items-center gap-2 text-primary hover:text-primary-glow transition-colors mb-6"
+                className="inline-flex items-center gap-2 text-accent hover:text-white transition-colors mb-6 font-poppins text-[11px] tracking-[0.08em] uppercase font-bold"
               >
-                <ArrowLeft className="h-4 w-4" />
-                Back to Portfolio
+                <ArrowLeft className="h-3.5 w-3.5" />
+                Back to Archive
               </Link>
-              <span className="text-primary text-sm font-medium tracking-wider uppercase block mb-2">
+              <span className="text-metadata mb-2">
                 {subtitle}
               </span>
-              <h1 className="font-playfair text-4xl md:text-6xl font-bold text-secondary-foreground mb-4">
-                {title} <span className="text-primary">Gallery</span>
+              <h1 className="text-display-giant text-white mb-6">
+                {title}
               </h1>
-              <p className="text-secondary-foreground/80 text-lg max-w-2xl">
+              <p className="text-white/85 text-[15px] sm:text-base lg:text-[17px] max-w-2xl font-poppins leading-relaxed font-normal">
                 {description}
               </p>
             </div>
@@ -94,104 +94,108 @@ const GalleryLayout = ({
         </section>
 
         {/* Gallery Grid */}
-        <section className="py-16 bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center mb-8">
-              <p className="text-muted-foreground">
-                <span className="text-foreground font-semibold">{images.length}</span> photos in this collection
-              </p>
-            </div>
+        <section className="py-24 bg-background">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20">
+             <div className="flex justify-between items-center mb-12">
+               <p className="font-poppins text-xs sm:text-sm tracking-wide text-white/60 uppercase font-medium">
+                 Collection Archive &nbsp;·&nbsp; <span className="text-accent font-semibold">{images.length}</span> visual works
+               </p>
+             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {images.map((image, index) => (
-                <div
-                  key={image.id}
-                  className={`group relative overflow-hidden rounded-xl cursor-pointer fade-in-delay-${(index % 3) + 1} ${
-                    image.size === 'large' ? 'sm:col-span-2 sm:row-span-2' :
-                    image.size === 'medium' ? 'sm:row-span-2' : ''
-                  }`}
-                  onClick={() => setSelectedImage(image)}
-                >
-                  <div className="aspect-[4/5] overflow-hidden">
-                    <img
-                      src={image.src}
-                      alt={image.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                  </div>
-                  
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="font-playfair text-xl font-semibold text-secondary-foreground mb-1">
-                      {image.title}
-                    </h3>
-                    {image.description && (
-                      <p className="text-secondary-foreground/70 text-sm">{image.description}</p>
-                    )}
-                  </div>
+            {/* Asymmetrical Editorial Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+              {images.map((image, index) => {
+                // Dynamically assign variable visual weights
+                let gridClasses = 'md:col-span-4'; // default
+                let aspectClasses = 'aspect-[3/4]';
+                
+                if (index % 5 === 0) {
+                  gridClasses = 'md:col-span-8';
+                  aspectClasses = 'aspect-[16/10]';
+                } else if (index % 5 === 3) {
+                  gridClasses = 'md:col-span-12';
+                  aspectClasses = 'aspect-[21/9]';
+                }
 
-                  {/* Action Buttons */}
-                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleLike(image.id);
-                      }}
-                      className={`p-2 rounded-full backdrop-blur-sm transition-colors ${
-                        likedImages.has(image.id) 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-secondary/80 text-secondary-foreground hover:bg-primary hover:text-primary-foreground'
-                      }`}
-                    >
-                      <Heart className={`h-4 w-4 ${likedImages.has(image.id) ? 'fill-current' : ''}`} />
-                    </button>
+                return (
+                  <div
+                    key={image.id}
+                    className={`group relative overflow-hidden bg-[#121212] cursor-pointer ${gridClasses}`}
+                    onClick={() => setSelectedImage(image)}
+                  >
+                    <div className={`${aspectClasses} overflow-hidden`}>
+                      <img
+                        src={image.src}
+                        alt={image.title}
+                        className="w-full h-full object-cover transition-transform duration-[1800ms] scale-102 group-hover:scale-100"
+                        loading="lazy"
+                      />
+                    </div>
+                    
+                    {/* Dark gradient hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-0 group-hover:opacity-85 transition-opacity duration-500" />
+                    
+                    <div className="absolute inset-0 flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                      <h3 className="font-playfair text-xl font-light text-white mb-1">
+                        {image.title}
+                      </h3>
+                      {image.description && (
+                        <p className="font-poppins text-[10px] text-white/50 uppercase tracking-widest">{image.description}</p>
+                      )}
+                    </div>
+
+                    {/* Action button hover */}
+                    <div className="absolute top-6 right-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleLike(image.id);
+                        }}
+                        className={`p-2.5 rounded-none backdrop-blur-md transition-colors ${
+                          likedImages.has(image.id) 
+                            ? 'bg-accent text-black' 
+                            : 'bg-black/55 text-white hover:bg-accent hover:text-black'
+                        }`}
+                      >
+                        <Heart className={`h-3.5 w-3.5 ${likedImages.has(image.id) ? 'fill-current' : ''}`} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Lightbox Modal */}
+        {/* Fullscreen Art Lightbox Modal */}
         {selectedImage && (
           <div 
-            className="fixed inset-0 z-50 bg-secondary/95 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-6"
             onClick={() => setSelectedImage(null)}
           >
-            <div className="relative max-w-5xl w-full max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+            <div className="relative max-w-6xl w-full max-h-[85vh]" onClick={(e) => e.stopPropagation()}>
               <img
                 src={selectedImage.src}
                 alt={selectedImage.title}
-                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                className="w-full h-auto max-h-[75vh] object-contain mx-auto"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-secondary to-transparent">
-                <h3 className="font-playfair text-2xl font-bold text-secondary-foreground mb-2">
+              
+              {/* Overlay Caption */}
+              <div className="mt-6 text-center space-y-1 font-poppins">
+                <h3 className="font-playfair text-2xl font-light text-white">
                   {selectedImage.title}
                 </h3>
-                {selectedImage.description && (
-                  <p className="text-secondary-foreground/70">{selectedImage.description}</p>
-                )}
+                 {selectedImage.description && (
+                   <p className="text-white/75 text-xs sm:text-sm tracking-wide font-normal">{selectedImage.description}</p>
+                 )}
               </div>
-              <div className="absolute top-4 right-4 flex gap-2">
+
+              {/* Close Button overlay */}
+              <div className="absolute top-[-40px] right-0 flex gap-2">
                 <Button 
                   size="icon" 
-                  variant="secondary"
-                  className="bg-secondary/80 backdrop-blur-sm"
-                >
-                  <Share2 className="h-4 w-4" />
-                </Button>
-                <Button 
-                  size="icon" 
-                  variant="secondary"
-                  className="bg-secondary/80 backdrop-blur-sm"
-                >
-                  <Download className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="bg-secondary/80 backdrop-blur-sm"
+                  variant="ghost"
+                  className="text-white/60 hover:text-white"
                   onClick={() => setSelectedImage(null)}
                 >
                   Close
@@ -202,17 +206,17 @@ const GalleryLayout = ({
         )}
 
         {/* Related Categories */}
-        <section className="py-16 bg-muted">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-playfair text-2xl font-bold text-foreground mb-8 text-center">
-              Explore More <span className="text-primary">Categories</span>
+        <section className="py-24 border-t border-white/5 bg-surface">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20">
+            <h2 className="font-playfair text-2xl font-light text-white mb-12 text-center">
+              Explore More Categories
             </h2>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-10 font-poppins text-xs md:text-sm tracking-[0.06em] uppercase">
               {relatedCategories.map((category) => (
                 <Link
                   key={category.id}
                   to={`/portfolio/${category.id}`}
-                  className="px-6 py-3 bg-background border border-border rounded-full text-foreground hover:border-primary hover:text-primary transition-colors duration-300"
+                  className="text-white/70 hover:text-accent border-b border-transparent hover:border-accent pb-1 transition-all duration-300 font-semibold"
                 >
                   {category.title}
                 </Link>
