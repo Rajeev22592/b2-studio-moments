@@ -2,187 +2,120 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import WhatsAppWidget from '@/components/WhatsAppWidget';
+import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import weddingSample from '@/assets/wedding-sample.jpg';
-import fashionSample from '@/assets/fashion-sample.jpg';
-import droneSample from '@/assets/drone-sample.jpg';
+import { portfolioCategories, portfolioProjects, studioConfig } from '@/lib/studio-data';
 
 const Portfolio = () => {
-  const categories = [
-    {
-      id: 'weddings',
-      title: 'Weddings',
-      description: 'Timeless moments of love captured with elegance',
-      image: weddingSample,
-      count: 45,
-    },
-    {
-      id: 'portraits',
-      title: 'Portraits',
-      description: 'Expressive portraits that reveal true character',
-      image: fashionSample,
-      count: 38,
-    },
-    {
-      id: 'events',
-      title: 'Events',
-      description: 'Corporate gatherings and celebrations documented',
-      image: droneSample,
-      count: 52,
-    },
-    {
-      id: 'commercial',
-      title: 'Commercial',
-      description: 'Brand imagery that drives business success',
-      image: weddingSample,
-      count: 29,
-    },
-    {
-      id: 'product',
-      title: 'Product',
-      description: 'Showcase your products with stunning visuals',
-      image: fashionSample,
-      count: 67,
-    },
-    {
-      id: 'fashion',
-      title: 'Fashion',
-      description: 'Editorial and runway photography',
-      image: fashionSample,
-      count: 41,
-    },
-    {
-      id: 'travel',
-      title: 'Travel',
-      description: 'Breathtaking destinations and adventures',
-      image: droneSample,
-      count: 34,
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
       <Helmet>
-        <title>Portfolio | B2 Studio Photography - Wedding, Fashion & Event Photography</title>
-        <meta name="description" content="Explore B2 Studio's stunning photography portfolio. Browse our galleries featuring weddings, portraits, events, commercial, product, fashion, and travel photography." />
-        <meta name="keywords" content="photography portfolio, wedding photos, portrait photography, event photography, commercial photography, fashion photography" />
-        <link rel="canonical" href="https://b2studio.com/portfolio" />
+        <title>Photography Portfolios & Selected Archives | {studioConfig.name}</title>
+        <meta name="description" content="Explore B2 Studio's professional photography archives. Browse curated galleries for Weddings, Films, Portraits, Events and Commercial campaigns." />
+        <link rel="canonical" href="https://b2studio.in/portfolio" />
       </Helmet>
 
       <Navigation />
-      
-      <main className="pt-16">
-        {/* Hero Section */}
-        <section className="relative py-24 bg-secondary overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary to-secondary/90" />
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-20 w-72 h-72 bg-primary rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary/50 rounded-full blur-3xl" />
-          </div>
-          
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-medium mb-6 fade-in">
-              Our Work
+
+      <main className="pt-24">
+        {/* Page Hero */}
+        <section className="py-28 border-b border-white/5 bg-gradient-to-b from-background to-surface">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 text-center space-y-6">
+            <span className="text-metadata text-center">
+              CURATED GALLERIES
             </span>
-            <h1 className="font-playfair text-4xl md:text-6xl font-bold text-secondary-foreground mb-6 fade-in-delay-1">
-              Portfolio <span className="text-primary">&</span> Galleries
+            <h1 className="text-editorial-title max-w-4xl mx-auto text-[#FAF8F5]">
+              Portfolio & <br />
+              <span className="italic text-accent font-normal">Selected Archives</span>
             </h1>
-            <p className="text-xl text-secondary-foreground/70 max-w-3xl mx-auto fade-in-delay-2">
-              Discover our diverse collection of photography spanning weddings, portraits, 
-              commercial projects, and artistic endeavors. Each image tells a unique story.
+            <div className="w-12 h-px bg-accent/30 mx-auto my-6" />
+            <p className="text-body-editorial text-white/85 max-w-2xl mx-auto">
+              Explore our artistic captures organized by category. Each folder represents
+              a dedicated creative approach, balancing luxury detailing and raw emotion.
             </p>
           </div>
         </section>
 
-        {/* Categories Grid */}
-        <section className="py-20 bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.map((category, index) => (
-                <Link
-                  key={category.id}
-                  to={`/portfolio/${category.id}`}
-                  className={`group relative overflow-hidden rounded-2xl aspect-[4/5] fade-in-delay-${(index % 3) + 1}`}
-                >
-                  {/* Image */}
-                  <img
-                    src={category.image}
-                    alt={`${category.title} Photography`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-                  
-                  {/* Content */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-8">
-                    <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
-                      <span className="text-primary text-sm font-medium tracking-wider uppercase mb-2 block">
-                        {category.count} Photos
+        {/* Categories Gateway Cards */}
+        <section className="py-32">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {portfolioCategories.map((cat, index) => {
+                // Find matching project to extract its thumbnail as the cover
+                const matchedProject = portfolioProjects.find(p => p.category === cat.slug);
+                const coverImage = matchedProject ? matchedProject.thumbnail : "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800";
+
+                // Count total pictures in this category
+                const catProjects = portfolioProjects.filter(p => p.category === cat.slug);
+                const totalPhotos = catProjects.reduce((acc, curr) => acc + curr.images.length, 0);
+
+                return (
+                  <Link
+                    key={cat.slug}
+                    to={`/portfolio/${cat.slug}`}
+                    className="group relative flex flex-col justify-end aspect-[3/4] bg-muted overflow-hidden select-none border border-white/5"
+                  >
+                    {/* Background Image */}
+                    <img
+                      src={coverImage}
+                      alt={`${cat.name} Portfolio`}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] scale-102 group-hover:scale-100"
+                      loading="lazy"
+                    />
+
+                    {/* Dark gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-300" />
+
+                    {/* Content */}
+                    <div className="relative p-8 space-y-3 z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <span className="font-poppins text-[10px] uppercase tracking-[0.08em] text-accent font-medium block">
+                        {totalPhotos} archives &nbsp;·&nbsp; category 0{index + 1}
                       </span>
-                      <h3 className="font-playfair text-3xl font-bold text-secondary-foreground mb-3">
-                        {category.title}
+                      <h3 className="font-playfair text-2xl sm:text-3xl font-normal tracking-wide text-white">
+                        {cat.name}
                       </h3>
-                      <p className="text-secondary-foreground/70 mb-4 line-clamp-2">
-                        {category.description}
+                      <p className="font-poppins text-xs sm:text-[13px] text-white/85 leading-relaxed line-clamp-2 font-normal">
+                        {cat.description}
                       </p>
-                      <span className="inline-flex items-center text-primary font-medium group-hover:gap-3 gap-2 transition-all duration-300">
+                      <div className="pt-2 flex items-center gap-2 text-accent font-poppins text-xs tracking-[0.06em] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         View Gallery
-                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                      </span>
+                        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Decorative Border */}
-                  <div className="absolute inset-4 border border-primary/0 group-hover:border-primary/30 rounded-xl transition-all duration-500" />
-                </Link>
-              ))}
+
+                    {/* Fine Corner Borders */}
+                    <div className="absolute inset-6 border border-accent/0 group-hover:border-accent/25 transition-all duration-700" />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="py-16 bg-secondary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { value: '300+', label: 'Projects Completed' },
-                { value: '50K+', label: 'Photos Delivered' },
-                { value: '7', label: 'Specialty Categories' },
-                { value: '15+', label: 'Awards Won' },
-              ].map((stat, index) => (
-                <div key={index} className="fade-in">
-                  <div className="font-playfair text-4xl md:text-5xl font-bold text-primary mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-secondary-foreground/70">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-20 bg-background">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Ready to Create Your <span className="text-primary">Story</span>?
+        {/* Global Commission CTA */}
+        <section className="py-24 border-t border-white/5 bg-surface">
+          <div className="max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 className="text-section-title text-[#FAF8F5]">
+              Interested in a custom booking?
             </h2>
-            <p className="text-muted-foreground text-lg mb-8">
-              Let's discuss your vision and bring it to life through our lens.
+            <p className="text-body-editorial text-white/75 max-w-xl mx-auto">
+              We design specific visual layouts depending on dates, locations, and brand scopes.
+              Get in touch with our Creative Director to plan your custom collection.
             </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold hover:bg-primary-glow transition-all duration-300 shadow-gold"
-            >
-              Start Your Project
-              <ArrowRight className="h-5 w-5" />
-            </Link>
+            <div className="pt-4">
+              <Link to="/contact">
+                <Button className="bg-[#F3EFE7] text-[#171513] hover:bg-accent hover:text-[#171513] font-poppins text-[13px] md:text-[14px] tracking-[0.05em] uppercase px-8 py-5 rounded-none transition-all duration-300 font-semibold">
+                  Connect With Us
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
 
       <Footer />
+      <WhatsAppWidget />
     </div>
   );
 };

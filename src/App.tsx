@@ -11,6 +11,8 @@ import Services from "./pages/Services";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import CustomCursor from "./components/CustomCursor";
+import Preloader from "./components/Preloader";
 
 // Portfolio Category Pages
 import Weddings from "./pages/portfolio/Weddings";
@@ -27,8 +29,10 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <Preloader />
         <Toaster />
         <Sonner />
+        <CustomCursor />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />

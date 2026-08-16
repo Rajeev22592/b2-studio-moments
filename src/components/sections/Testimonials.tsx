@@ -1,96 +1,96 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Star } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { testimonialsList } from '@/lib/studio-data';
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: 'Sarah & Michael Johnson',
-      event: 'Wedding Photography',
-      rating: 5,
-      text: 'B2 Studio captured our wedding day perfectly! The attention to detail and artistic vision exceeded our expectations. Every photo tells a beautiful story of our special day.',
-      image: '👰',
-    },
-    {
-      name: 'David Chen',
-      event: 'Corporate Event',
-      rating: 5,
-      text: 'Professional, punctual, and incredibly talented. The team at B2 Studio documented our product launch flawlessly. The photos are being used across all our marketing materials.',
-      image: '👨‍💼',
-    },
-    {
-      name: 'Emma Rodriguez',
-      event: 'Fashion Shoot',
-      rating: 5,
-      text: 'Working with B2 Studio was an amazing experience. Their creative direction and technical expertise resulted in stunning portfolio images that have elevated my modeling career.',
-      image: '👩‍🎨',
-    },
-  ];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const nextTestimonial = () => {
+    setActiveIndex((prev) => (prev + 1) % testimonialsList.length);
+  };
+
+  const prevTestimonial = () => {
+    setActiveIndex((prev) => (prev - 1 + testimonialsList.length) % testimonialsList.length);
+  };
 
   return (
-    <section className="py-20 bg-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16 fade-in">
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            Client <span className="text-primary">Stories</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what our satisfied clients have to say about their experience with B2 Studio.
-          </p>
-        </div>
+    <section className="py-32 light bg-background text-foreground overflow-hidden border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20">
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
+          
+          {/* Left Column - Synchronized Editorial Image (60%) */}
+          <div className="lg:col-span-6 relative aspect-[4/5] bg-black/5 overflow-hidden">
+            {testimonialsList.map((item, index) => (
+              <div
+                key={item.id}
+                className={`absolute inset-0 transition-all duration-[1200ms] ease-in-out ${
+                  index === activeIndex 
+                    ? 'opacity-90 scale-100 pointer-events-auto' 
+                    : 'opacity-0 scale-105 pointer-events-none'
+                }`}
+              >
+                <img
+                  src={item.avatar}
+                  alt={item.clientName}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+            {/* Fine border outline */}
+            <div className="absolute inset-6 border border-white/20 pointer-events-none" />
+          </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className={`bg-white shadow-medium hover:shadow-hero transition-shadow fade-in-delay-${index + 1}`}>
-              <CardContent className="p-6">
-                {/* Rating */}
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-primary fill-current" />
-                  ))}
-                </div>
+          {/* Right Column - Quote & Navigation Controls (40%) */}
+          <div className="lg:col-span-6 space-y-10 relative flex flex-col justify-center min-h-[350px]">
+            <Quote className="h-12 w-12 text-accent/30" />
 
-                {/* Testimonial Text */}
-                <p className="text-muted-foreground mb-6 leading-relaxed italic">
-                  "{testimonial.text}"
-                </p>
+            <div className="relative min-h-[220px]">
+              {testimonialsList.map((item, index) => {
+                const isActive = index === activeIndex;
+                return (
+                  <div
+                    key={item.id}
+                    className={`transition-all duration-700 absolute inset-0 flex flex-col justify-between ${
+                      isActive ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-8 pointer-events-none'
+                    }`}
+                  >
+                    <blockquote className="font-playfair text-xl sm:text-2xl font-normal italic leading-relaxed text-[#171513]">
+                      “{item.quote}”
+                    </blockquote>
 
-                {/* Client Info */}
-                <div className="flex items-center">
-                  <div className="text-3xl mr-4">{testimonial.image}</div>
-                  <div>
-                    <h4 className="font-playfair font-semibold text-foreground">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-sm text-primary">{testimonial.event}</p>
+                    <div className="pt-6 font-poppins">
+                      <span className="block text-base font-medium tracking-wide text-[#171513]">
+                        {item.clientName}
+                      </span>
+                      <span className="block text-[11px] sm:text-[12px] tracking-[0.08em] text-accent uppercase mt-1 font-medium">
+                        {item.eventType} &nbsp;·&nbsp; {item.location}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                );
+              })}
+            </div>
 
-        {/* Trust Indicators */}
-        <div className="mt-16 text-center fade-in-delay-2">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
-            <div>
-              <div className="font-playfair text-2xl font-bold text-primary mb-1">4.9/5</div>
-              <div className="text-sm text-muted-foreground">Average Rating</div>
-            </div>
-            <div>
-              <div className="font-playfair text-2xl font-bold text-primary mb-1">200+</div>
-              <div className="text-sm text-muted-foreground">Reviews</div>
-            </div>
-            <div>
-              <div className="font-playfair text-2xl font-bold text-primary mb-1">100%</div>
-              <div className="text-sm text-muted-foreground">Referral Rate</div>
-            </div>
-            <div>
-              <div className="font-playfair text-2xl font-bold text-primary mb-1">24/7</div>
-              <div className="text-sm text-muted-foreground">Support</div>
+            {/* Navigation Controls */}
+            <div className="flex gap-4 pt-4">
+              <button
+                onClick={prevTestimonial}
+                className="w-10 h-10 border border-black/10 hover:border-accent hover:text-accent rounded-none flex items-center justify-center text-black transition-colors"
+                aria-label="Previous Testimonial"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="w-10 h-10 border border-black/10 hover:border-accent hover:text-accent rounded-none flex items-center justify-center text-black transition-colors"
+                aria-label="Next Testimonial"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
+
         </div>
       </div>
     </section>

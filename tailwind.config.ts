@@ -19,8 +19,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'playfair': ['Playfair Display', 'serif'],
-				'poppins': ['Poppins', 'sans-serif'],
+				'playfair': ['Cormorant Garamond', 'serif'],
+				'poppins': ['Manrope', 'sans-serif'],
+				'cormorant': ['Cormorant Garamond', 'serif'],
+				'manrope': ['Manrope', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -35,8 +37,7 @@ export default {
 				overlay: 'hsl(var(--overlay))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
+					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',

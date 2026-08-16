@@ -106,13 +106,13 @@ const Blog = () => {
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 bg-gradient-to-b from-surface to-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="inline-block px-4 py-1 mb-4 text-sm font-medium text-primary border border-primary/30 rounded-full">
+            <span className="inline-block px-4 py-1 mb-4 text-sm font-medium text-accent border border-accent/30 rounded-full">
               Insights & Stories
             </span>
-            <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Blog & <span className="text-primary">Case Studies</span>
+            <h1 className="text-editorial-title text-foreground mb-6">
+              Blog & <span className="text-accent">Case Studies</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="font-poppins text-[15px] sm:text-base lg:text-[17px] text-foreground/80 leading-relaxed font-normal max-w-2xl mx-auto">
               Discover photography tips, behind-the-scenes insights, and real success stories 
               that showcase our passion for capturing extraordinary moments.
             </p>
@@ -123,8 +123,8 @@ const Blog = () => {
         {featuredPost && (
           <section className="py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="font-playfair text-2xl font-bold text-foreground mb-8">Featured Article</h2>
-              <article className="group relative overflow-hidden rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all duration-300">
+              <h2 className="font-playfair text-2xl font-normal text-foreground mb-8">Featured Article</h2>
+              <article className="group relative overflow-hidden rounded-2xl bg-surface border border-border hover:border-accent/50 transition-all duration-300">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative h-64 md:h-auto overflow-hidden">
                     <img 
@@ -133,33 +133,33 @@ const Blog = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-primary text-primary-foreground text-sm font-medium rounded-full">
+                      <span className="px-3 py-1 bg-accent text-black text-sm font-medium rounded-full">
                         Featured
                       </span>
                     </div>
                   </div>
                   <div className="p-8 md:p-12 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-4 text-[11px] sm:text-xs text-white/70 mb-4 uppercase tracking-[0.1em] font-medium">
                       <span className="flex items-center gap-1">
-                        <Tag className="w-4 h-4" />
+                        <Tag className="w-3.5 h-3.5 text-accent" />
                         {featuredPost.category}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
+                        <Calendar className="w-3.5 h-3.5 text-accent" />
                         {featuredPost.date}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
+                        <Clock className="w-3.5 h-3.5 text-accent" />
                         {featuredPost.readTime}
                       </span>
                     </div>
-                    <h3 className="font-playfair text-2xl md:text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
+                    <h3 className="font-playfair text-2xl md:text-3xl font-normal text-foreground mb-4 group-hover:text-accent transition-colors">
                       {featuredPost.title}
                     </h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <p className="font-poppins text-[15px] sm:text-base text-white/80 mb-6 leading-relaxed font-normal">
                       {featuredPost.excerpt}
                     </p>
-                    <Button className="w-fit group/btn">
+                    <Button className="w-fit group/btn bg-[#F3EFE7] text-[#171513] hover:bg-accent font-semibold">
                       Read Article
                       <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                     </Button>
@@ -173,12 +173,12 @@ const Blog = () => {
         {/* Blog Posts Grid */}
         <section className="py-12 bg-surface/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-playfair text-2xl font-bold text-foreground mb-8">Latest Articles</h2>
+            <h2 className="font-playfair text-2xl font-normal text-foreground mb-8">Latest Articles</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {regularPosts.map((post) => (
                 <article 
                   key={post.id}
-                  className="group bg-background rounded-xl overflow-hidden border border-border hover:border-primary/50 hover:shadow-elegant transition-all duration-300"
+                  className="group bg-background rounded-xl overflow-hidden border border-border hover:border-accent/50 hover:shadow-elegant transition-all duration-300"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img 
@@ -193,23 +193,23 @@ const Blog = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                    <div className="flex items-center gap-4 text-[10px] sm:text-[11px] text-white/70 mb-3 uppercase tracking-[0.1em] font-medium">
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
+                        <Calendar className="w-3 h-3 text-accent" />
                         {post.date}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
+                        <Clock className="w-3 h-3 text-accent" />
                         {post.readTime}
                       </span>
                     </div>
-                    <h3 className="font-playfair text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="font-playfair text-lg font-normal text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                    <p className="font-poppins text-xs sm:text-sm text-white/80 mb-4 line-clamp-3 font-normal">
                       {post.excerpt}
                     </p>
-                    <button className="flex items-center text-primary font-medium text-sm group/link">
+                    <button className="flex items-center text-accent font-semibold text-[13px] md:text-[14px] group/link">
                       Read More
                       <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
                     </button>
@@ -224,13 +224,13 @@ const Blog = () => {
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1 mb-4 text-sm font-medium text-primary border border-primary/30 rounded-full">
+              <span className="inline-block px-4 py-1 mb-4 text-sm font-medium text-accent border border-accent/30 rounded-full">
                 Success Stories
               </span>
-              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-4">
+              <h2 className="font-playfair text-3xl md:text-4xl font-normal text-foreground mb-4">
                 Case Studies
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="font-poppins text-[15px] sm:text-base text-foreground/80 max-w-2xl mx-auto font-normal">
                 Explore how we've helped our clients achieve exceptional results through 
                 strategic photography and creative storytelling.
               </p>
@@ -240,7 +240,7 @@ const Blog = () => {
               {caseStudies.map((study, index) => (
                 <article 
                   key={study.id}
-                  className="group bg-surface rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300"
+                  className="group bg-surface rounded-2xl overflow-hidden border border-border hover:border-accent/30 transition-all duration-300"
                 >
                   <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
                     <div className={`relative h-64 lg:h-auto overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
@@ -251,40 +251,40 @@ const Blog = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute bottom-4 left-4 right-4">
-                        <span className="px-3 py-1 bg-primary text-primary-foreground text-sm font-medium rounded-full">
+                        <span className="px-3 py-1 bg-accent text-black text-sm font-medium rounded-full">
                           {study.category}
                         </span>
                       </div>
                     </div>
-                    <div className={`p-8 lg:p-12 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                      <p className="text-sm text-primary font-medium mb-2">{study.client}</p>
-                      <h3 className="font-playfair text-2xl font-bold text-foreground mb-6">
-                        {study.title}
-                      </h3>
-                      
-                      <div className="space-y-4 mb-6">
-                        <div>
-                          <h4 className="text-sm font-semibold text-foreground mb-1">The Challenge</h4>
-                          <p className="text-sm text-muted-foreground">{study.challenge}</p>
+                      <div className={`p-8 lg:p-12 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                        <p className="text-[11px] sm:text-[12px] text-accent tracking-[0.1em] uppercase font-medium mb-2">{study.client}</p>
+                        <h3 className="font-playfair text-2xl font-normal text-white mb-6">
+                          {study.title}
+                        </h3>
+                        
+                        <div className="space-y-4 mb-6">
+                          <div>
+                            <h4 className="text-[11px] sm:text-xs tracking-[0.1em] uppercase text-accent font-medium mb-1">The Challenge</h4>
+                            <p className="font-poppins text-[15px] sm:text-base text-white/80 font-normal leading-relaxed">{study.challenge}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-[11px] sm:text-xs tracking-[0.1em] uppercase text-accent font-medium mb-1">Our Solution</h4>
+                            <p className="font-poppins text-[15px] sm:text-base text-white/80 font-normal leading-relaxed">{study.solution}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-[11px] sm:text-xs tracking-[0.1em] uppercase text-accent font-medium mb-1">The Results</h4>
+                            <p className="font-poppins text-[15px] sm:text-base text-white/80 font-normal leading-relaxed">{study.results}</p>
+                          </div>
                         </div>
-                        <div>
-                          <h4 className="text-sm font-semibold text-foreground mb-1">Our Solution</h4>
-                          <p className="text-sm text-muted-foreground">{study.solution}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-semibold text-foreground mb-1">The Results</h4>
-                          <p className="text-sm text-muted-foreground">{study.results}</p>
-                        </div>
-                      </div>
 
-                      <blockquote className="relative pl-4 border-l-2 border-primary italic text-muted-foreground mb-6">
-                        "{study.testimonial}"
-                        <cite className="block mt-2 text-sm font-medium text-foreground not-italic">
-                          — {study.client}
-                        </cite>
-                      </blockquote>
+                        <blockquote className="relative pl-4 border-l-2 border-accent italic text-white/85 mb-6 font-normal">
+                          "{study.testimonial}"
+                          <cite className="block mt-2 text-xs sm:text-[13px] font-medium text-white/80 not-italic">
+                            — {study.client}
+                          </cite>
+                        </blockquote>
 
-                      <Button variant="outline" className="group/btn">
+                      <Button variant="outline" className="group/btn border-white/20 text-white hover:text-accent font-semibold">
                         <Eye className="w-4 h-4 mr-2" />
                         View Full Case Study
                         <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
@@ -298,12 +298,12 @@ const Blog = () => {
         </section>
 
         {/* Newsletter CTA */}
-        <section className="py-20 bg-gradient-to-r from-primary/10 via-surface to-primary/10">
+        <section className="py-20 bg-gradient-to-r from-accent/10 via-surface to-accent/10">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="font-playfair text-3xl font-bold text-foreground mb-4">
+            <h2 className="font-playfair text-3xl font-normal text-foreground mb-4">
               Stay Inspired
             </h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="font-poppins text-[15px] sm:text-base text-foreground/80 mb-8 font-normal">
               Subscribe to our newsletter for the latest photography tips, behind-the-scenes content, 
               and exclusive offers delivered straight to your inbox.
             </p>
@@ -311,9 +311,9 @@ const Blog = () => {
               <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                className="flex-1 px-4 py-3 bg-background border border-border rounded-none focus:outline-none focus:border-accent transition-colors font-poppins text-sm text-white font-normal"
               />
-              <Button type="submit">
+              <Button type="submit" className="bg-[#F3EFE7] text-[#171513] hover:bg-accent font-semibold rounded-none py-3 px-8">
                 Subscribe
               </Button>
             </form>
